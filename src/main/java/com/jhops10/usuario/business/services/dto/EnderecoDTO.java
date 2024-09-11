@@ -1,6 +1,5 @@
-package com.jhops10.usuario.infrastructure.entities;
+package com.jhops10.usuario.business.services.dto;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,15 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "endereco")
 @Builder
-public class Endereco {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class EnderecoDTO {
 
     private String rua;
     private Long numero;
