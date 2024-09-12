@@ -35,7 +35,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Usuario> buscarUsuarioPorEmail (@RequestParam("email") String email) {
+    public ResponseEntity<Usuario> buscarUsuarioPorEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
@@ -43,6 +43,13 @@ public class UsuarioController {
     public ResponseEntity<Void> deleteByEmail(@PathVariable String email) {
         usuarioService.deletaUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<UsuarioDTO> atualizaDadosUsuario(@RequestBody UsuarioDTO usuarioDTO,
+                                                           @RequestHeader("Authorization") String token) {
+
+        return ResponseEntity.ok(usuarioService.atualizaDadosUsuario(token, usuarioDTO));
     }
 
 }
