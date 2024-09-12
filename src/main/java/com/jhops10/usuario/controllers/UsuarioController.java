@@ -1,6 +1,8 @@
 package com.jhops10.usuario.controllers;
 
 import com.jhops10.usuario.business.services.UsuarioService;
+import com.jhops10.usuario.business.services.dto.EnderecoDTO;
+import com.jhops10.usuario.business.services.dto.TelefoneDTO;
 import com.jhops10.usuario.business.services.dto.UsuarioDTO;
 import com.jhops10.usuario.infrastructure.entities.Usuario;
 import com.jhops10.usuario.infrastructure.security.JwtUtil;
@@ -35,7 +37,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Usuario> buscarUsuarioPorEmail (@RequestParam("email") String email) {
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
@@ -43,6 +45,24 @@ public class UsuarioController {
     public ResponseEntity<Void> deleteByEmail(@PathVariable String email) {
         usuarioService.deletaUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<UsuarioDTO> atualizaDadosUsuario(@RequestBody UsuarioDTO usuarioDTO,
+                                                           @RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(usuarioService.atualizaDadosUsuario(token, usuarioDTO));
+    }
+
+    @PutMapping("/endereco")
+    public ResponseEntity<EnderecoDTO> atualizadaEndereco(@RequestBody EnderecoDTO enderecoDTO,
+                                                          @RequestParam("id") Long id) {
+        return ResponseEntity.ok(usuarioService.atualizaEndereco(id, enderecoDTO));
+    }
+
+    @PutMapping("/telefone")
+    public ResponseEntity<TelefoneDTO> atualizaTelefone(@RequestBody TelefoneDTO telefoneDTO,
+                                                          @RequestParam("id") Long id) {
+        return ResponseEntity.ok(usuarioService.atualizaTelefone(id, telefoneDTO));
     }
 
 }
