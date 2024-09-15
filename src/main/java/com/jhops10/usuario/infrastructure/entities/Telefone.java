@@ -21,4 +21,6 @@ public class Telefone {
 
     private String ddd;
     private String numero;
+    private Long usuario_id;
+
 }
